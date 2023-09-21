@@ -1,0 +1,73 @@
+/* BenchDataForm.css */
+.form-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0px;
+    background-color: darkcyan; /* Background color updated to darkcyan */
+  }
+  
+  .form-heading {
+    text-align: left;
+    margin: 0 auto;
+    padding: 10px;
+    color: white; /* Heading text color updated to white */
+  }
+  
+  .form-paragraph {
+    text-align: left;
+    color: white; /* Paragraph text color updated to white */
+    margin: 10 auto;
+    padding: 20px;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .form-label {
+    width: 45%;
+    text-align: left;
+  }
+  
+  .form-input,
+  .form-textarea,
+  .form-select {
+    width: 50%;
+    padding: 5px;
+  }
+  
+  .form-radio {
+    display: flex;
+    align-items: center;
+  }
+  
+  .form-radio-input {
+    margin-right: 5px;
+  }
+  
+  .form-submit {
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  /* Add this to your existing CSS styles */
+.required-field {
+    color: red; /* Change the color to indicate required fields */
+    margin-left: 5px; /* Add some spacing between label and the asterisk */
+}
+
+  
+  /* Add a class for the aquamarine background */
+.azure-background {
+    background-color: azure;
+    /*padding: 10px; /* Add padding to space content from the background */
+    /*border-radius: 5px; /* Add rounded corners for a neat appearance */
+    max-width: 1000px;
+    margin: 01 auto;
+    padding: 10px;
+  }
