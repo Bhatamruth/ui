@@ -1,0 +1,662 @@
+App.js
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Container } from '@mui/material';
+import HomePage from './HomePage';
+import CarCategories from './CarCategories';
+import DealerDetails from './DealerDetails'; 
+import './App.css'; // Import your CSS file
+
+const appStyles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '100vh',
+
+  },
+  logo: {
+    fontSize: '50px',
+    fontWeight: 'bold',
+    color: 'red',
+    animation: 'bounce 2s infinite',
+  },
+};
+
+function App() {
+  const [startShopping, setStartShopping] = useState(false);
+
+  return (
+    
+    <Router>
+      <Container style={appStyles.container}>
+        <h1 style={appStyles.logo}>Carzy</h1>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              startShopping ? (
+                <CarCategories />
+              ) : (
+                <HomePage onStartShopping={() => setStartShopping(true)} />
+              )
+            }
+          />
+{/* Route for the DealerDetails page */}
+<Route path="/dealer-details" element={<DealerDetails/>} />
+        </Routes>
+      </Container>
+    </Router>
+  );
+}
+
+export default App;
+
+
+CarCategories.js
+import React, { useState } from 'react';
+import { Paper, Typography } from '@mui/material';
+
+const carCategories = [
+  {
+    name: 'Sedan',
+    imageUrl: 'https://images.unsplash.com/photo-1619485029177-28ce04ffbbfe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c2VkYW58ZW58MHx8MHx8fDA%3D&w=1000&q=80',
+    categoryData: [
+      {
+        id: 1,
+        name: 'Sedan 1',
+        imageUrl: 'https://imgd.aeplcdn.com/600x337/n/cw/ec/134287/2023-city-exterior-right-front-three-quarter.jpeg?isig=0&q=80',
+        description: 'This is Sedan 1',
+        price: 25000,
+      },
+      {
+        id: 2,
+        name: 'Sedan 2',
+        imageUrl: 'https://images.91wheels.com//assets/b_images/main/models/profile/profile1660712804.png',
+        description: 'This is Sedan 2',
+        price: 28000,
+      },
+      {
+        id: 3,
+        name: 'Sedan 3',
+        imageUrl: 'https://imgd.aeplcdn.com/600x337/n/cw/ec/121943/verna-facelift-exterior-right-front-three-quarter.jpeg?isig=0&q=80',
+        description: 'This is Sedan 3',
+        price: 27000,
+      },
+      {
+        id: 4,
+        name: 'Sedan 4',
+        imageUrl: 'https://imgd-ct.aeplcdn.com/664x374/n/cw/ec/143275/city-hybrid-ehev-exterior-right-front-three-quarter.jpeg?isig=0&q=80',
+        description: 'This is Sedan 4',
+        price: 30000,
+      },
+    ],
+  },
+  {
+    name: 'SUV',
+    imageUrl: 'https://c4.wallpaperflare.com/wallpaper/634/597/281/luxury-suv-range-rover-velar-2017-4k-wallpaper-preview.jpg',
+    categoryData: [
+      {
+        id: 5,
+        name: 'SUV 1',
+        imageUrl: 'https://imgd.aeplcdn.com/600x337/n/cw/ec/128413/scorpio-exterior-right-front-three-quarter-46.jpeg?isig=0&q=80',
+        description: 'This is SUV 1',
+        price: 35000,
+      },
+      {
+        id: 6,
+        name: 'SUV 2',
+        imageUrl: 'https://gaadiwaadi.com/wp-content/uploads/2015/03/2015-mahindra-scorpio-rear-view-1.jpg',
+        description: 'This is SUV 2',
+        price: 38000,
+      },
+      {
+        id: 7,
+        name: 'SUV 3',
+        imageUrl: 'https://www.inventiva.co.in/wp-content/uploads/2022/02/mahindra-scorpio.jpg',
+        description: 'This is SUV 3',
+        price: 37000,
+      },
+      {
+        id: 8,
+        name: 'SUV 4',
+        imageUrl: 'https://d2m3nfprmhqjvd.cloudfront.net/blog/20220228142855/evoindia_2021-04_ace4dc66-2b1e-4378-ac6c-fc2fc10053f3_493410__1_.jpg',
+        description: 'This is SUV 4',
+        price: 40000,
+      },
+    ],
+  },
+  {
+    name: 'Truck',
+    imageUrl: 'https://c4.wallpaperflare.com/wallpaper/480/387/645/ford-f-150-raptor-pickup-trucks-car-wallpaper-preview.jpg',
+    categoryData: [
+      {
+        id: 9,
+        name: 'Truck 1',
+        imageUrl: 'https://c4.wallpaperflare.com/wallpaper/480/387/645/ford-f-150-raptor-pickup-trucks-car-wallpaper-preview.jpg',
+        description: 'This is Truck 1',
+        price: 45000,
+      },
+      {
+        id: 10,
+        name: 'Truck 2',
+        imageUrl: 'https://c4.wallpaperflare.com/wallpaper/480/387/645/ford-f-150-raptor-pickup-trucks-car-wallpaper-preview.jpg',
+        description: 'This is Truck 2',
+        price: 48000,
+      },
+      {
+        id: 11,
+        name: 'Truck 3',
+        imageUrl: 'https://c4.wallpaperflare.com/wallpaper/480/387/645/ford-f-150-raptor-pickup-trucks-car-wallpaper-preview.jpg',
+        description: 'This is Truck 3',
+        price: 47000,
+      },
+      {
+        id: 12,
+        name: 'Truck 4',
+        imageUrl: 'https://c4.wallpaperflare.com/wallpaper/480/387/645/ford-f-150-raptor-pickup-trucks-car-wallpaper-preview.jpg',
+        description: 'This is Truck 4',
+        price: 50000,
+      },
+    ],
+  },
+  {
+    name: 'Sports Car',
+    imageUrl: 'https://images3.alphacoders.com/115/115387.jpg',
+  },
+];
+
+const styles = {
+    container: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100vh',
+    },
+    carCategoryList: {
+      display: 'flex',
+      overflowX: 'auto',
+    },
+    categoryBox: {
+      flex: '0 0 auto',
+      margin: '40px',
+      padding: '20px',
+      border: '2px solid transparent',
+      transition: 'border 0.5s ease',
+      cursor: 'pointer',
+      borderRadius: '2px',
+      backgroundColor: 'white',
+      width: '80%',
+    },
+    categoryBoxSelected: {
+      border: '2px solid blue',
+    },
+    imageContainer: {
+      height: '200px',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      display: 'flex',
+      alignItems: 'center',
+      paddingLeft: '20px',
+      width: '90%',
+    },
+    contentContainer: {
+      padding: '40px',
+      width: '100%',
+      overflowY: 'auto',
+      maxHeight: '80vh',
+    },
+
+    categoryName: {
+      fontSize: '20px',
+      fontWeight: 'bold',
+      margin: 'px 10px',
+    },
+  };
+  
+  function CarCategories() {
+    const [selectedCategory, setSelectedCategory] = useState(null);
+  
+    const handleCategoryClick = (category) => {
+      setSelectedCategory(category);
+    };
+  
+    return (
+      <div style={styles.container}>
+        <div style={styles.carCategoryList}>
+          {carCategories.map((category) => (
+            <div
+              key={category.name}
+              style={{
+                ...styles.categoryBox,
+                ...(selectedCategory === category ? styles.categoryBoxSelected : null),
+              }}
+              onClick={() => handleCategoryClick(category)}
+            >
+              <Paper
+                elevation={4}
+                style={{
+                  ...styles.imageContainer,
+                  backgroundImage: `url(${category.imageUrl})`,
+                }}
+                className={styles.categoryCardContent}
+              >
+                <Typography variant="h7" bgcolor="white" fontStyle="normal" color="black">
+                  <div style={styles.categoryName}>{category.name}</div>
+                </Typography>
+              </Paper>
+            </div>
+          ))}
+        </div>
+  
+        <div style={styles.contentContainer}>
+          {selectedCategory && (
+            <div>
+              <Typography variant="h4" gutterBottom>
+                {selectedCategory.name} Cars
+              </Typography>
+              {selectedCategory.categoryData.map((car) => (
+                <Paper key={car.id} style={{ padding: '16px', marginBottom: '16px' }} className={styles.categoryCardContent}>
+                  <img src={car.imageUrl} alt={car.name} style={{ maxWidth: '100%' }} />
+                  <Typography variant="h6">{car.name}</Typography>
+                  <Typography variant="body1">{car.description}</Typography>
+                  <Typography variant="body2">Price: ${car.price}</Typography>
+                </Paper>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+  
+  export default CarCategories;
+
+DealerDetails.js
+import React, { useState } from 'react';
+import { Typography, Paper, Button, Accordion, AccordionSummary, AccordionDetails, Grid, Stack, ImageList, ImageListItem, Hidden, Modal, Popover, Popper, Portal, Fade } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; // Import ExpandMoreIcon
+import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
+
+// Sample car images for the ImageList
+const carImages = [
+  { img: 'https://d2m3nfprmhqjvd.cloudfront.net/blog/20220228142855/evoindia_2021-04_ace4dc66-2b1e-4378-ac6c-fc2fc10053f3_493410__1_.jpg', title: 'Car 1' },
+  { img: 'https://d2m3nfprmhqjvd.cloudfront.net/blog/20220228142855/evoindia_2021-04_ace4dc66-2b1e-4378-ac6c-fc2fc10053f3_493410__1_.jpg', title: 'Car 2' },
+  { img: 'https://d2m3nfprmhqjvd.cloudfront.net/blog/20220228142855/evoindia_2021-04_ace4dc66-2b1e-4378-ac6c-fc2fc10053f3_493410__1_.jpg', title: 'Car 3' },
+];
+
+const serviceAndRepairImages = [
+    'https://media.istockphoto.com/id/513706427/photo/auto-repair-shop-with-car-serviced-by-mechanics.jpg?s=612x612&w=0&k=20&c=P8roDdc_ayEVEaGJlpwYf4QhxKJjEpJzeRtdxbGWiZc=',
+    'https://media.istockphoto.com/id/513706427/photo/auto-repair-shop-with-car-serviced-by-mechanics.jpg?s=612x612&w=0&k=20&c=P8roDdc_ayEVEaGJlpwYf4QhxKJjEpJzeRtdxbGWiZc=',
+    'https://media.istockphoto.com/id/513706427/photo/auto-repair-shop-with-car-serviced-by-mechanics.jpg?s=612x612&w=0&k=20&c=P8roDdc_ayEVEaGJlpwYf4QhxKJjEpJzeRtdxbGWiZc=',
+    // Add more image URLs as needed
+  ];
+  
+// Sample customer reviews
+const customerReviews = [
+  {
+    id: 1,
+    name: 'John Doe',
+    rating: 5,
+    review: 'Great dealer! Excellent service and a wide selection of cars.',
+  },
+  {
+    id: 2,
+    name: 'Jane Smith',
+    rating: 4,
+    review: 'Good experience. They helped me find the perfect car.',
+  },
+  {
+    id: 3,
+    name: 'Bob Johnson',
+    rating: 5,
+    review: 'Outstanding customer service. I highly recommend this dealer.',
+  },
+  {
+    id: 4,
+    name: 'Emily Wilson',
+    rating: 3,
+    review: 'Average service. Could improve in some areas.',
+  },
+  {
+    id: 5,
+    name: 'David Brown',
+    rating: 4,
+    review: 'Overall, a good place to buy a car. Friendly staff.',
+  },
+];
+
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '100vh',
+  },
+  dealerInfo: {
+    padding: '20px',
+    textAlign: 'center',
+    backgroundColor: 'black', // Set background color to black
+    color: 'white', // Set text color to white
+  },
+  animation: {
+    animation: 'bounce 2s infinite',
+  },
+};
+
+function DealerDetails() {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  const dealers = [
+    {
+      name: 'ABC Motors',
+      location: 'New York, NY',
+      contactEmail: 'abc@example.com',
+      phoneNumber: '(123) 456-7890',
+    },
+ 
+  ];
+
+  const dealer = dealers[0];
+
+  // Handler for Popover
+  const handlePopoverOpen = () => {
+    // Implement your popover logic here
+    
+  };
+
+  const handlePopoverClose = () => {
+    // Implement your popover close logic here
+  };
+
+  return (
+    <div style={styles.container}>
+      <Paper elevation={3} style={styles.dealerInfo}>
+      <HomeIcon /><Typography variant="h4" gutterBottom>
+          Dealer Information
+        </Typography>
+        <Typography variant="body1" paragraph>
+          Dealer Name: {dealer.name}
+        </Typography>
+        <Typography variant="body1" paragraph>
+          Location: {dealer.location}
+        </Typography>
+        <Typography variant="body1" paragraph>
+          Contact Email: {dealer.contactEmail}
+        </Typography>
+        <Typography variant="body1" paragraph>
+          Phone Number: {dealer.phoneNumber}
+        </Typography>
+
+        {/* Material-UI Accordion */}
+        <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography variant="h6">Additional Information</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography variant="body1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida semper orci, id viverra urna fermentum quis. Fusce auctor, justo in dignissim feugiat, ipsum est semper dolor, at laoreet libero neque ut odio. Pellentesque eu fringilla est, vel varius libero. Sed vulputate fringilla libero, in rhoncus odio facilisis in. Integer interdum ex eu ultrices.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+
+        {/* Material-UI Grid */}
+        <Typography variant="h6" gutterBottom style={{ marginTop: '20px' }}>
+          Featured Cars
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper elevation={2} style={{ padding: '10px' }}>
+              <img src="https://m.economictimes.com/thumb/msid-61078713,width-1200,height-900,resizemode-4,imgsize-55292/best-5-suvs-to-buy-this-diwali.jpg" alt="Car 1" style={{ width: '100%' }} />
+              <Typography variant="body1" style={{ fontWeight: 'bold', marginTop: '10px' }}>
+                Car Model 1
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper elevation={2} style={{ padding: '10px' }}>
+              <img src="https://m.economictimes.com/thumb/msid-86938755,width-1200,height-900,resizemode-4,imgsize-78544/suv-astor.jpg" alt="Car 2" style={{ width: '100%' }} />
+              <Typography variant="body1" style={{ fontWeight: 'bold', marginTop: '10px' }}>
+                Car Model 2
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper elevation={2} style={{ padding: '10px' }}>
+              <img src="https://images.cnbctv18.com/wp-content/uploads/2022/07/Toyota-Urban-Cruiser-Hyryder-1-1019x573.png?im=FitAndFill,width=1200,height=900" alt="Car 3" style={{ width: '100%' }} />
+              <Typography variant="body1" style={{ fontWeight: 'bold', marginTop: '10px' }}>
+                Car Model 3
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+
+        {/* Material-UI Stack */}
+        <Typography variant="h6" gutterBottom style={{ marginTop: '20px' }}>
+          Contact Options
+        </Typography>
+        <Stack direction="row" spacing={2}>
+          <Button variant="contained" color="primary">
+            Call Now
+          </Button>
+          <Button variant="contained" color="secondary">
+            Send Email
+          </Button>
+          <Button variant="outlined" color="primary">
+            Visit Website
+          </Button>
+        </Stack>
+
+        {/* Material-UI Image List */}
+        <Typography variant="h6" gutterBottom style={{ marginTop: '20px' }}>
+          Car Gallery
+        </Typography>
+        <ImageList cols={3} rowHeight={200}>
+          {carImages.map((item) => (
+            <ImageListItem key={item.img}>
+              <img src={item.img} alt={item.title} />
+              <Typography variant="body2">{item.title}</Typography>
+            </ImageListItem>
+          ))}
+        </ImageList>
+
+        {/* Material-UI Hidden */}
+        <Hidden smDown>
+          <Typography variant="body1" style={{ marginTop: '20px' }}>
+            Content visible only on larger screens.
+          </Typography>
+        </Hidden>
+
+        {/* Material-UI Modal */}
+        <Modal open={false}>
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '20px' }}>
+            <Typography variant="h6" gutterBottom>
+              Modal Content
+            </Typography>
+            <Typography variant="body1" paragraph>
+              This is a Modal component.
+            </Typography>
+            <Button variant="contained" color="primary">
+              Close Modal
+            </Button>
+          </div>
+        </Modal>
+
+        {/* Material-UI Popover */}
+        <Button variant="outlined" onClick={handlePopoverOpen}>
+          Open Popover
+        </Button>
+        <Popover
+          open={false}
+          anchorEl={null}
+          onClose={handlePopoverClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        >
+          <Typography variant="body1" style={{ padding: '10px' }}>
+            This is a Popover component.
+          </Typography>
+          <Button variant="contained" color="primary">
+            Close Popover
+          </Button>
+        </Popover>
+
+        {/* Material-UI Popper */}
+        <Popper open={false} anchorEl={null} placement="bottom" transition>
+          {({ TransitionProps }) => (
+            <Fade {...TransitionProps} timeout={350}>
+              <Paper>
+                <Typography variant="body1" style={{ padding: '10px' }}>
+                  This is a Popper component.
+                </Typography>
+                <Button variant="contained" color="primary">
+                  Close Popper
+                </Button>
+              </Paper>
+            </Fade>
+          )}
+        </Popper>
+
+        {/* Material-UI Portal */}
+        <Portal>
+          <div style={{ position: 'fixed', bottom: '10px', right: '10px', backgroundColor: 'white', padding: '10px' }}>
+            <Typography variant="body1">
+              This is a Portal component.
+            </Typography>
+            <Button variant="contained" color="primary">
+              Close Portal
+            </Button>
+          </div>
+        </Portal>
+
+        {/* Customer Reviews */}
+        <Typography variant="h6" gutterBottom style={{ marginTop: '20px' }}>
+          Customer Reviews
+        </Typography>
+        {customerReviews.map((review) => (
+          <Paper key={review.id} elevation={3} style={{ padding: '10px', marginBottom: '10px' }}>
+            <Typography variant="h6" style={{ marginBottom: '5px' }}>
+              {review.name} - {review.rating} stars
+            </Typography>
+            <Typography variant="body1">{review.review}</Typography>
+          </Paper>
+        ))}
+        
+        {/* Image Masonry */}
+        <Typography variant="h6" gutterBottom style={{ marginTop: '20px' }}>
+          Service and Repair
+        </Typography>
+        <Grid container spacing={2}>
+          {serviceAndRepairImages.map((image, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <img src={image} alt={`Service and Repair ${index + 1}`} style={{ width: '100%' }} />
+            </Grid>
+          ))}
+        </Grid>
+        
+      </Paper>
+    </div>
+  );
+}
+
+export default DealerDetails;
+
+
+HomePage.js
+import React, { useEffect, useState } from 'react';
+import { Button, Typography, Container, Paper, Slide } from '@mui/material';
+import { Link } from 'react-router-dom';
+const styles = {
+  container: {
+    width: '100vw',
+    height: '100vh',
+    backgroundImage: `url('https://wallpapercave.com/wp/wp9977855.jpg')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    padding: '20px',
+    textAlign: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  },
+};
+
+function HomePage({ onStartShopping }) {
+  const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    // Trigger the slide-in animation when the component mounts
+    setShowContent(true);
+  }, []);
+
+  const handleButtonClick = () => {
+    // Trigger the slide-out animation when the button is clicked
+    setShowContent(false);
+    onStartShopping();
+  };
+
+  return (
+    <Slide in={showContent} direction="up" timeout={500}>
+      <div style={styles.container}>
+        <Container maxWidth="sm">
+          <Paper elevation={3} style={styles.paper}>
+            <Typography variant="h4" gutterBottom>
+              Welcome to Carzy!
+            </Typography>
+            <Typography variant="body1" paragraph>
+              Explore a wide range of cars and find your dream vehicle today.
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={handleButtonClick}
+            >
+              Let's Go Shopping
+            </Button>
+            <Typography variant="body2" color="textSecondary" style={{ marginTop: '20px' }}>
+              Discover the latest models and best deals.
+            </Typography>
+{/* New segment for searching for a dealer */}
+<div style={{ marginTop: '20px' }}>
+              <Typography variant="h6" gutterBottom>
+                Want to know about dealer?
+              </Typography>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                
+                <Link to="/dealer-details"> {/* Link to the DealerDetails page */}
+                <Button 
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={handleButtonClick}
+            >
+                    Search
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </Paper>
+        </Container>
+      </div>
+    </Slide>
+  );
+}
+export default HomePage;
