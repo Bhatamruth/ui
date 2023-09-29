@@ -1,0 +1,118 @@
+App.js
+// src/App.js
+import React from 'react';
+import MenuPage from './MenuPage';
+
+function App() {
+  return (
+    <div>
+      <MenuPage />
+    </div>
+  );
+}
+
+export default App;
+
+Menupage.js
+import React, { useState } from 'react';
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+} from '@mui/material';
+
+const MenuPage = () => {
+  const menuItems = [
+    {
+      id: 1,
+      name: 'Spaghetti Carbonara',
+      description: 'Classic Italian pasta dish with eggs, cheese, and pancetta.',
+      price: 12.99,
+    },
+    {
+      id: 2,
+      name: 'Margherita Pizza',
+      description: 'Tomato, mozzarella, and basil pizza.',
+      price: 10.99,
+    },
+    {
+      id: 3,
+      name: 'Grilled Chicken Salad',
+      description: 'Fresh greens with grilled chicken, tomatoes, and balsamic vinaigrette.',
+      price: 9.99,
+    },
+    // Add more menu items as needed
+  ];
+
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  const addItemToCart = (item) => {
+    setSelectedItems([...selectedItems, item]);
+  };
+
+  return (
+    <Container>
+      <Box my={4}>
+        <Typography variant="h4" align="center">
+          Menu
+        </Typography>
+        <Grid container spacing={2}>
+          {menuItems.map((item) => (
+            <Grid item xs={12} sm={6} md={4} key={item.id}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h6" component="div">
+                    {item.name}
+                  </Typography>
+                  <Typography color="textSecondary">{item.description}</Typography>
+                  <Typography variant="h6" color="primary">
+                    ${item.price.toFixed(2)}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => addItemToCart(item)}
+                  >
+                    Add to Cart
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+      <Box my={4}>
+        <Typography variant="h4" align="center">
+          Cart
+        </Typography>
+        <List>
+          {selectedItems.length === 0 ? (
+            <ListItem>
+              <ListItemText primary="Your cart is empty." />
+            </ListItem>
+          ) : (
+            selectedItems.map((item) => (
+              <ListItem key={item.id}>
+                <ListItemText
+                  primary={`${item.name} - $${item.price.toFixed(2)}`}
+                />
+              </ListItem>
+            ))
+          )}
+        </List>
+      </Box>
+    </Container>
+  );
+};
+
+export default MenuPage;
